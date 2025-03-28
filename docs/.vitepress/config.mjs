@@ -3,7 +3,6 @@ import sidebar from './sideBarData.json'
 // https://vitepress.dev/reference/site-config
 
 
-
 export default defineConfig({
   base: '/WebSite',
   head: [['link', { rel: 'icon', href: '/cat_fish.svg' }]],
@@ -21,7 +20,9 @@ export default defineConfig({
       { text: 'Home', link: '/' },
       { text: '笔记', link: '/笔记/' }
     ],
-
+    search: {
+      provider: 'local'
+    },
     sidebar,
     // sidebar: [
     //   {

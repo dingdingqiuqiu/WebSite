@@ -4,35 +4,30 @@
     "collapsed": true,
     "items": [
       {
-        "text": "梯度",
-        "link": "/笔记/AI/梯度"
-      },
-      {
-        "text": "深度学习综述",
-        "link": "/笔记/AI/深度学习综述"
+        "text": "VGG16",
+        "link": "/笔记/AI/VGG16"
       }
-    ],
-    "link": "/笔记/AI/"
+    ]
+  },
+  {
+    "text": "CS",
+    "collapsed": true,
+    "items": [
+      {
+        "text": "电脑是怎么开机的",
+        "link": "/笔记/CS/电脑是怎么开机的"
+      }
+    ]
   },
   {
     "text": "EN",
     "collapsed": true,
     "items": [
       {
-        "text": "3_The Paradise of Palau",
-        "link": "/笔记/EN/3_The Paradise of Palau"
-      },
-      {
-        "text": "凌乱记录",
-        "link": "/笔记/EN/凌乱记录"
+        "text": "资源收藏",
+        "link": "/笔记/EN/资源收藏"
       }
-    ],
-    "link": "/笔记/EN/"
-  },
-  {
-    "text": "CS",
-    "collapsed": true,
-    "items": []
+    ]
   },
   {
     "text": "Old",
@@ -149,10 +144,6 @@
       {
         "text": "nodejs版本控制",
         "link": "/笔记/Old/nodejs版本控制"
-      },
-      {
-        "text": "nvim-latex",
-        "link": "/笔记/Old/nvim-latex"
       },
       {
         "text": "OS-进程实验",
