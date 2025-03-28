@@ -5,7 +5,7 @@ import sidebar from './sideBarData.json'
 
 
 export default defineConfig({
-  base: '/DocsWebsite',
+  base: '/WebSite',
   head: [['link', { rel: 'icon', href: '/cat_fish.svg' }]],
   title: "Ding01ng's site",
   description: "Ding01ng的笔记记录网站",
