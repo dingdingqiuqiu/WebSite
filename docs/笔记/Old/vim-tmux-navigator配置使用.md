@@ -23,27 +23,12 @@ seam接缝 seamless无缝的
 consistent 一致的
 
 
-这个插件是概要中描述的Mislav Marohnić的tmux-navigator配置的重打包。当与一组tmux键绑定结合使用时，该插件将允许您使用一组一致的热键在vim和tmux分割之间无缝导航。
 
 NOTE: This requires tmux v1.8 or higher.
 
 注意:这个插件需要tmux版本在v1.8以上
 ### 用法
-This plugin provides the following mappings which allow you to move between Vim panes and tmux splits seamlessly.
-这个插件提供以下按键映射，允许你在vim的panes（窗格）和tmux的splits（分割）间无缝切换
 
-<ctrl-h> => Left
-<ctrl-j> => Down
-<ctrl-k> => Up
-<ctrl-l> => Right
-<ctrl-\\> => Previous split（前一个分割）
-
-Note - you don't need to use your tmux prefix key sequence before using the mappings.
-prefix前缀
-注意，在使用这个映射之前你无需使用tmux的前缀键序列
-
-If you want to use alternate key mappings, see the configuration section below.
-如果你想使用可选的映射，看下面的配置那一段
 
 ## 安装
 
