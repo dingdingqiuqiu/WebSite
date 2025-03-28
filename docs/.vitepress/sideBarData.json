@@ -15,24 +15,221 @@
     "link": "/笔记/AI/"
   },
   {
-    "text": "英语",
+    "text": "EN",
     "collapsed": true,
     "items": [
       {
         "text": "3_The Paradise of Palau",
-        "link": "/笔记/英语/3_The Paradise of Palau"
+        "link": "/笔记/EN/3_The Paradise of Palau"
       },
       {
         "text": "凌乱记录",
-        "link": "/笔记/英语/凌乱记录"
+        "link": "/笔记/EN/凌乱记录"
       }
     ],
-    "link": "/笔记/英语/"
+    "link": "/笔记/EN/"
   },
   {
-    "text": "算法",
+    "text": "CS",
     "collapsed": true,
-    "items": [],
-    "link": "/笔记/算法/"
+    "items": []
+  },
+  {
+    "text": "Old",
+    "collapsed": true,
+    "items": [
+      {
+        "text": "Archlinux双系统及其软件生态配置",
+        "link": "/笔记/Old/Archlinux双系统及其软件生态配置"
+      },
+      {
+        "text": "Archlinux深度学习环境搭建",
+        "link": "/笔记/Old/Archlinux深度学习环境搭建"
+      },
+      {
+        "text": "Arch配置Git自动登录验证",
+        "link": "/笔记/Old/Arch配置Git自动登录验证"
+      },
+      {
+        "text": "Blog多平台同步",
+        "link": "/笔记/Old/Blog多平台同步"
+      },
+      {
+        "text": "Bomb二进制炸弹拆弹实验",
+        "link": "/笔记/Old/Bomb二进制炸弹拆弹实验"
+      },
+      {
+        "text": "Bufbomb栈溢出炸弹实验",
+        "link": "/笔记/Old/Bufbomb栈溢出炸弹实验"
+      },
+      {
+        "text": "Checksum校验",
+        "link": "/笔记/Old/Checksum校验"
+      },
+      {
+        "text": "CS61b食用指南-WEEK1",
+        "link": "/笔记/Old/CS61b食用指南-WEEK1"
+      },
+      {
+        "text": "CS61b食用指南",
+        "link": "/笔记/Old/CS61b食用指南"
+      },
+      {
+        "text": "Frida使用",
+        "link": "/笔记/Old/Frida使用"
+      },
+      {
+        "text": "git手册",
+        "link": "/笔记/Old/git手册"
+      },
+      {
+        "text": "IDA-v8-3指北",
+        "link": "/笔记/Old/IDA-v8-3指北"
+      },
+      {
+        "text": "Java前后端项目部署运行",
+        "link": "/笔记/Old/Java前后端项目部署运行"
+      },
+      {
+        "text": "LC005",
+        "link": "/笔记/Old/LC005"
+      },
+      {
+        "text": "LG-P1007-独木桥",
+        "link": "/笔记/Old/LG-P1007-独木桥"
+      },
+      {
+        "text": "linux环境中matplotlib画图缺少字体",
+        "link": "/笔记/Old/linux环境中matplotlib画图缺少字体"
+      },
+      {
+        "text": "ML-lab1-利用梯度下降法训练线性回归模型",
+        "link": "/笔记/Old/ML-lab1-利用梯度下降法训练线性回归模型"
+      },
+      {
+        "text": "ML-lab3对数几率回归",
+        "link": "/笔记/Old/ML-lab3对数几率回归"
+      },
+      {
+        "text": "MySQl-单表查询",
+        "link": "/笔记/Old/MySQl-单表查询"
+      },
+      {
+        "text": "Mysql开发技巧-查询、索引和完整性",
+        "link": "/笔记/Old/Mysql开发技巧-查询、索引和完整性"
+      },
+      {
+        "text": "MySQL开发技巧-视图",
+        "link": "/笔记/Old/MySQL开发技巧-视图"
+      },
+      {
+        "text": "MySQL数据库 - 数据库和表的基本操作",
+        "link": "/笔记/Old/MySQL数据库 - 数据库和表的基本操作"
+      },
+      {
+        "text": "MySQL数据库-使用聚合函数查询",
+        "link": "/笔记/Old/MySQL数据库-使用聚合函数查询"
+      },
+      {
+        "text": "MySQL数据库-选课系统查询",
+        "link": "/笔记/Old/MySQL数据库-选课系统查询"
+      },
+      {
+        "text": "mysql连接不上3306端口",
+        "link": "/笔记/Old/mysql连接不上3306端口"
+      },
+      {
+        "text": "Neovim与Tmux快捷键设置",
+        "link": "/笔记/Old/Neovim与Tmux快捷键设置"
+      },
+      {
+        "text": "Neovim使用",
+        "link": "/笔记/Old/Neovim使用"
+      },
+      {
+        "text": "nodejs版本控制",
+        "link": "/笔记/Old/nodejs版本控制"
+      },
+      {
+        "text": "nvim-latex",
+        "link": "/笔记/Old/nvim-latex"
+      },
+      {
+        "text": "OS-进程实验",
+        "link": "/笔记/Old/OS-进程实验"
+      },
+      {
+        "text": "RFC1071翻译及其应用",
+        "link": "/笔记/Old/RFC1071翻译及其应用"
+      },
+      {
+        "text": "SQL多表查询",
+        "link": "/笔记/Old/SQL多表查询"
+      },
+      {
+        "text": "tensorflow使用警告",
+        "link": "/笔记/Old/tensorflow使用警告"
+      },
+      {
+        "text": "vim-tmux-navigator配置使用",
+        "link": "/笔记/Old/vim-tmux-navigator配置使用"
+      },
+      {
+        "text": "VPS搭建",
+        "link": "/笔记/Old/VPS搭建"
+      },
+      {
+        "text": "vscode-setting-bk",
+        "link": "/笔记/Old/vscode-setting-bk"
+      },
+      {
+        "text": "wsl配置使用notebook",
+        "link": "/笔记/Old/wsl配置使用notebook"
+      },
+      {
+        "text": "前缀和",
+        "link": "/笔记/Old/前缀和"
+      },
+      {
+        "text": "动态规划",
+        "link": "/笔记/Old/动态规划"
+      },
+      {
+        "text": "数据库创建时指定位置的问题",
+        "link": "/笔记/Old/数据库创建时指定位置的问题"
+      },
+      {
+        "text": "数据库实验x",
+        "link": "/笔记/Old/数据库实验x"
+      },
+      {
+        "text": "滑动窗口-双指针",
+        "link": "/笔记/Old/滑动窗口-双指针"
+      },
+      {
+        "text": "电脑是怎么开机的(x86)",
+        "link": "/笔记/Old/电脑是怎么开机的(x86)"
+      },
+      {
+        "text": "编译原理-一-词法分析",
+        "link": "/笔记/Old/编译原理-一-词法分析"
+      },
+      {
+        "text": "编译原理",
+        "link": "/笔记/Old/编译原理"
+      },
+      {
+        "text": "计算机系统基础NJU",
+        "link": "/笔记/Old/计算机系统基础NJU"
+      },
+      {
+        "text": "计网-知识整理",
+        "link": "/笔记/Old/计网-知识整理"
+      },
+      {
+        "text": "计网-综合实验6-企业级互联网",
+        "link": "/笔记/Old/计网-综合实验6-企业级互联网"
+      }
+    ]
   }
 ]
