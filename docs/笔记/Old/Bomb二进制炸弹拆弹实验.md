@@ -586,7 +586,7 @@ vim answer.txt
 
 调试时
 
-```gdb
+```zsh
 r answer.txt
 ```
 

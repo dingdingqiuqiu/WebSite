@@ -248,7 +248,7 @@ git checkout -b master
 
 
 
-```config
+```
 Host github.com
 Hostname ssh.github.com
 Port 443

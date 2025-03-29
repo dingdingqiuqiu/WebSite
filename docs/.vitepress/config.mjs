@@ -5,7 +5,7 @@ import sidebar from './sideBarData.json'
 
 export default defineConfig({
   base: '/WebSite', 
-  head: [['link', { rel: 'icon', type: 'image/svg+xml',href: '../public/logo.svg' }]],
+  head: [['link', { rel: 'icon' ,href: '/WebSite/favicon.ico' }]],
   title: "Ding01ng's site",
   description: "Ding01ng的笔记记录网站",
   cleanUrls: true, //从 URL 中删除 .html 后缀

@@ -20,16 +20,6 @@
     ]
   },
   {
-    "text": "EN",
-    "collapsed": true,
-    "items": [
-      {
-        "text": "资源收藏",
-        "link": "/笔记/EN/资源收藏"
-      }
-    ]
-  },
-  {
     "text": "Old",
     "collapsed": true,
     "items": [
@@ -220,6 +210,16 @@
       {
         "text": "计网-综合实验6-企业级互联网",
         "link": "/笔记/Old/计网-综合实验6-企业级互联网"
+      }
+    ]
+  },
+  {
+    "text": "EN",
+    "collapsed": true,
+    "items": [
+      {
+        "text": "资源收藏",
+        "link": "/笔记/EN/资源收藏"
       }
     ]
   }
