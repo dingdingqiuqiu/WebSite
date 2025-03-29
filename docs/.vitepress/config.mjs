@@ -4,8 +4,8 @@ import sidebar from './sideBarData.json'
 
 
 export default defineConfig({
-  base: '/WebSite',
-  head: [['link', { rel: 'icon', href: '/cat_fish.svg' }]],
+  base: '/WebSite', 
+  head: [['link', { rel: 'icon', type: 'image/svg+xml',href: '/logo.svg' }]],
   title: "Ding01ng's site",
   description: "Ding01ng的笔记记录网站",
   cleanUrls: true, //从 URL 中删除 .html 后缀
@@ -24,28 +24,7 @@ export default defineConfig({
       provider: 'local'
     },
     sidebar,
-    // sidebar: [
-    //   {
-    //     text: '目录',
-    //     items: [
-    //       { text: 'Happy Birthday!', link: '/笔记/' },
-    //       {
-    //         text: '英语',
-    //         collapsed: true,
-    //         items: [
-    //           { text: '英语', link: '/笔记/英语/英语' }
-    //         ]
-    //       },
-    //       {
-    //         text: '算法',
-    //         collapsed: true,
-    //         items: [
-    //           { text: '算法之旅', link: '/笔记/算法/' }
-    //         ]
-    //       }
-    //     ]
-    //   }
-    // ],
+    
 
     socialLinks: [
       { icon: 'github', link: 'https://github.com/dingdingqiuqiu' }

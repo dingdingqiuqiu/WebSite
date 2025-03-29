@@ -17,10 +17,18 @@ hero:
 
 features:
   - icon:
-      dark: /cat.svg
-      light: /cat.svg
-    title: GitHub
-    details: 访问我的 GitHub 个人主页，查看我的代码库和项目。
-    link: https://github.com/dingdingqiuqiu
+      src: /a-1f338.svg
+    title: 小楼一夜听春雨，深巷明朝卖杏花。
+    details: 《临安春雨初霁》陆游
+  - icon:
+      dark: /chaye.svg
+      light: /chaye.svg
+    title: 且将新火试新茶，诗酒趁年华。
+    details: 《望江南·超然台作》 苏轼
+  - icon:
+      dark: /niao-.svg
+      light: /niao-.svg
+    title: 春眠不觉晓，处处闻啼鸟。
+    details: 《春晓》孟浩然
 ---
 
