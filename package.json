@@ -4,6 +4,7 @@
     "vitepress": "^1.6.3"
   },
   "scripts": {
+    "dev": "node scripts/getChilds.mjs && vitepress dev docs",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs",
