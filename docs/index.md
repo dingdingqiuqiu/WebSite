@@ -17,8 +17,8 @@ hero:
 
 features:
   - icon:
-      dark: /wcat.svg
-      light: /wcat.svg
+      dark: /star.svg
+      light: /star.svg
     title: GitHub
     details: 访问我的 GitHub 个人主页，查看我的代码库和项目。
     link: https://github.com/dingdingqiuqiu
