@@ -246,5 +246,43 @@
         "link": "/笔记/Old/计网-综合实验6-企业级互联网"
       }
     ]
+  },
+  {
+    "text": "八股",
+    "collapsed": true,
+    "items": []
+  },
+  {
+    "text": "日记",
+    "collapsed": true,
+    "items": [
+      {
+        "text": "25_10",
+        "link": "/笔记/日记/25_10"
+      }
+    ]
+  },
+  {
+    "text": "算法",
+    "collapsed": true,
+    "items": [
+      {
+        "text": "1.1-0STL用法",
+        "link": "/笔记/算法/1.1-0STL用法"
+      },
+      {
+        "text": "1.1-1STL源码",
+        "link": "/笔记/算法/1.1-1STL源码"
+      },
+      {
+        "text": "1.1数组理论基础",
+        "link": "/笔记/算法/1.1数组理论基础"
+      }
+    ]
+  },
+  {
+    "text": "项目",
+    "collapsed": true,
+    "items": []
   }
 ]

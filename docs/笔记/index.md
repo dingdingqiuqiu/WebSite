@@ -17,5 +17,23 @@
 
 [小插件-自动处理文件目录](https://iflowers.site/%E7%AC%94%E8%AE%B0/%E8%BF%81%E7%A7%BB%E8%BF%87%E7%A8%8B.html)
 
+### How to use?
 
+#### 创建新文章
+
+可以直接在本地新建`md`文档
+
+#### 运行查看效果
+
+```
+ npm run dev
+```
+
+### 部署生成
+
+> 写到了`git push`的自动化操作里
+
+```
+git push
+```
 
