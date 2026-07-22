@@ -48,6 +48,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Generate sidebar
+        run: node scripts/getChilds.mjs
+
       - name: Build with VitePress
         run: pnpm docs:build
 
