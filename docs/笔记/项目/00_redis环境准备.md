@@ -29,6 +29,9 @@ docker run -d --name redis-dev -p 6379:6379 redis:7.0 redis-server --bind 0.0.0.
 完成标志：
 ![image-20260810164543481](assets/00_redis环境准备/image-20260810164543481.png)
 
+后续启动镜像在`Docker Desktop`的`Containers`中启动镜像即可，如下：
+![image-20260829193837773](assets/00_redis环境准备/image-20260829193837773.png)
+
 附：`Docker Desktop`的一些设置（实际上所有奇怪设置都应该**关掉**，开着只会出拒绝连接的BUG）
 
 > 附赠无魔法镜像站：https://github.com/dongyubin/DockerHub
