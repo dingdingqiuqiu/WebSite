@@ -47,6 +47,22 @@ function needLink(nowPath) {
 //             });
 //         }
 //     }
+
+//     const task = directorys.map(async (directoryName) => {
+//         let tmpObj = {
+//             text: directoryName,
+//             collapsed: true,
+//             items: await getRes([], url + directoryName + '/', nowDir + directoryName + '/')
+//         }
+//         if (needLink(url + directoryName)) {
+//             tmpObj.link = url + directoryName + '/';
+//         }
+//         now.push(tmpObj)
+//     })
+//     await Promise.all(task);
+//     return now;
+// }
+
 async function getRes(now, url = '/笔记/', nowDir = dir) {
     const files = await fs.promises.readdir(nowDir);
     files.sort();                                   // 按名称排序，保证顺序稳定
@@ -68,7 +84,6 @@ async function getRes(now, url = '/笔记/', nowDir = dir) {
             });
         }
     }
-
     // 顺序处理目录，保证目录按 directorys 顺序插入 now
     for (const directoryName of directorys) {
         let tmpObj = {
@@ -85,21 +100,7 @@ async function getRes(now, url = '/笔记/', nowDir = dir) {
     return now;
 }
 
-    const task = directorys.map(async (directoryName) => {
-        let tmpObj = {
-            text: directoryName,
-            collapsed: true,
-            items: await getRes([], url + directoryName + '/', nowDir + directoryName + '/')
-        }
-        if (needLink(url + directoryName)) {
-            tmpObj.link = url + directoryName + '/';
-        }
 
-        now.push(tmpObj)
-    })
-    await Promise.all(task);
-    return now;
-}
 
 const res = await getRes([]);
 
