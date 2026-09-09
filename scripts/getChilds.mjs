@@ -25,20 +25,41 @@ function needLink(nowPath) {
 // now: 现在构建的目录数组 []
 // url：对应的 url 路由
 // nowDir：对应的实际本地路径
+// async function getRes(now, url = '/笔记/', nowDir = dir) {
+//     const files = await fs.promises.readdir(nowDir);
+//     let directorys = [];
+//     for (const file of files) {
+//         const filePath = path.join(nowDir, file);
+
+//         let fileName = path.basename(filePath);
+//         const isDirectory = fs.lstatSync(filePath).isDirectory();
+//         // 如果是能够构建路由的目录，则收集到数组中，稍后再 push
+//         if (isDirectory) {
+//             if (fileName === 'black-box' || fileName === 'assets'|| (url === '/笔记/' && fileName === 'assets')) continue;
+//             directorys.push(fileName);
+//         } else {
+//             // 如果是文件，则直接 push 
+//             fileName = fileName.slice(0, fileName.length - 3);
+//             if (fileName === 'index') continue;
+//             now.push({
+//                 text: fileName,
+//                 link: url + fileName,
+//             });
+//         }
+//     }
 async function getRes(now, url = '/笔记/', nowDir = dir) {
     const files = await fs.promises.readdir(nowDir);
+    files.sort();                                   // 按名称排序，保证顺序稳定
     let directorys = [];
     for (const file of files) {
         const filePath = path.join(nowDir, file);
 
         let fileName = path.basename(filePath);
         const isDirectory = fs.lstatSync(filePath).isDirectory();
-        // 如果是能够构建路由的目录，则收集到数组中，稍后再 push
         if (isDirectory) {
             if (fileName === 'black-box' || fileName === 'assets'|| (url === '/笔记/' && fileName === 'assets')) continue;
             directorys.push(fileName);
         } else {
-            // 如果是文件，则直接 push 
             fileName = fileName.slice(0, fileName.length - 3);
             if (fileName === 'index') continue;
             now.push({
@@ -47,6 +68,22 @@ async function getRes(now, url = '/笔记/', nowDir = dir) {
             });
         }
     }
+
+    // 顺序处理目录，保证目录按 directorys 顺序插入 now
+    for (const directoryName of directorys) {
+        let tmpObj = {
+            text: directoryName,
+            collapsed: true,
+            items: await getRes([], url + directoryName + '/', nowDir + directoryName + '/')
+        }
+        if (needLink(url + directoryName)) {
+            tmpObj.link = url + directoryName + '/';
+        }
+        now.push(tmpObj);
+    }
+
+    return now;
+}
 
     const task = directorys.map(async (directoryName) => {
         let tmpObj = {
