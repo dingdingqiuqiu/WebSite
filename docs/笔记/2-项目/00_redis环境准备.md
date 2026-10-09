@@ -3,6 +3,12 @@
 在`wsl`中执行
 
 > 在wsl中走默认代理与官方镜像站连接就不会被拒 wsl会自动使用系统代理 也是相当智能了
+>
+> 需要注意docker对某一个ip的流量会有限流 梯子用的人太多了 很容易pull不下来 因此镜像站加**关梯子**未尝不是好选择
+>
+> 镜像站拉取：docker pull docker.m.daocloud.io/library/mongo:6
+>
+> 重命名：docker tag docker.m.daocloud.io/library/mongo:6 mongo:6
 
 ```bash
  docker pull redis:7.0  
