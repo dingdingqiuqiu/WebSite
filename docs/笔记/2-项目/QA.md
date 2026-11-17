@@ -33,7 +33,7 @@ refresh token 有 7 天，它的唯一职责是“换新的 access”。**它是
 
 ### 你代码里的实现
 
-[UserServiceImpl.java:242](tfshz/src/main/java/com/tfsh/Service/impl/UserServiceImpl.java#L242)：
+`tfshz/src/main/java/com/tfsh/Service/impl/UserServiceImpl.java:242`：
 
 ```
 1. 验签 + 校验 type=refresh    → 防伪造、防拿 access 冒充
@@ -60,7 +60,7 @@ refresh token 有 7 天，它的唯一职责是“换新的 access”。**它是
 
 ### 顺带两个风险点（说的时候要心里有数）
 
-**① `logout()` 用了 `KEYS`**（[UserServiceImpl.java:287](tfshz/src/main/java/com/tfsh/Service/impl/UserServiceImpl.java#L287)）：
+**① `logout()` 用了 `KEYS`**（`tfshz/src/main/java/com/tfsh/Service/impl/UserServiceImpl.java:287`）：
 
 ```java
 Set<String> keys = stringRedisTemplate.keys(LOGIN_REFRESH_KEY + userId + ":*");
@@ -68,7 +68,7 @@ Set<String> keys = stringRedisTemplate.keys(LOGIN_REFRESH_KEY + userId + ":*");
 
 `KEYS` 是全库扫描，数据量大时会把 Redis 单线程卡住几百毫秒到几秒——秒杀场景下这是致命的。正确做法是用一个 `Set` 维护该用户的所有 jti，或者直接按 session family 存一个 key 整体删。
 
-**② access 被踢后还能再用 30 分钟**。这是有意取舍，[RefreshTokenInterceptor.java](tfshz/src/main/java/com/tfsh/utils/RefreshTokenInterceptor.java) 的注释写了。要“秒级踢人”就得给 access 加黑名单，那就等于每个请求都查 Redis，双 token 的性能红利归零。这是取舍不是缺陷，关键是你知道自己选了哪一边。
+**② access 被踢后还能再用 30 分钟**。这是有意取舍，`tfshz/src/main/java/com/tfsh/utils/RefreshTokenInterceptor.java` 的注释写了。要“秒级踢人”就得给 access 加黑名单，那就等于每个请求都查 Redis，双 token 的性能红利归零。这是取舍不是缺陷，关键是你知道自己选了哪一边。
 
 ---
 
@@ -112,9 +112,9 @@ Set<String> keys = stringRedisTemplate.keys(LOGIN_REFRESH_KEY + userId + ":*");
 
 **① 一致性变弱。** 后台重建完成前的几百毫秒里，用户读的是旧数据。所以这方案只适合能容忍短暂陈旧的数据——你用在秒杀券列表，合适；用在库存、余额上就是灾难。
 
-**② 并发重建。** 一堆线程同时发现过期，会同时起重建任务。所以还得加把锁，只有抢到的才真去查库。[CacheClient.java:72](tfshz/src/main/java/com/tfsh/utils/CacheClient.java#L72) 这一点你做对了。
+**② 并发重建。** 一堆线程同时发现过期，会同时起重建任务。所以还得加把锁，只有抢到的才真去查库。`tfshz/src/main/java/com/tfsh/utils/CacheClient.java:72` 这一点你做对了。
 
-**③ 你现在的 key 会永驻内存。** [CacheClient.java:121](tfshz/src/main/java/com/tfsh/utils/CacheClient.java#L121) 的 `set(key, json)` 没带 TTL。逻辑过期方案一般仍建议设一个远大于逻辑过期时间的物理 TTL 兜底，防止冷数据把 Redis 撑满。
+**③ 你现在的 key 会永驻内存。** `tfshz/src/main/java/com/tfsh/utils/CacheClient.java:121` 的 `set(key, json)` 没带 TTL。逻辑过期方案一般仍建议设一个远大于逻辑过期时间的物理 TTL 兜底，防止冷数据把 Redis 撑满。
 
 ### “删除失败由消息队列补偿重试”是什么意思
 
@@ -124,7 +124,7 @@ Set<String> keys = stringRedisTemplate.keys(LOGIN_REFRESH_KEY + userId + ":*");
 
 补偿就是：删失败时，把“要删哪个 key”写进队列（你用的是 Redis Stream `stream.cache-delete`），由消费者异步重试删除。
 
-[CacheDeleteCompensator.java](tfshz/src/main/java/com/tfsh/utils/CacheDeleteCompensator.java) 里有三个关键设计：
+`tfshz/src/main/java/com/tfsh/utils/CacheDeleteCompensator.java` 里有三个关键设计：
 
 1. **消息里只放 key，不放数据。** 因为“删除”这个动作天然可以重复做，所以消息重复消费没有副作用。这是补偿能用队列实现的**根本原因**。如果放的是数据，重投就可能把旧数据又写回去。
 2. **梯度退避**：1s、2s、4s……上限 60s，最多 10 次。避免失败瞬间密集重试，把 Redis 打得更死。
@@ -175,7 +175,7 @@ Set<String> keys = stringRedisTemplate.keys(LOGIN_REFRESH_KEY + userId + ":*");
 
 ### 先还原场景
 
-[VoucherOrderServiceImpl.java:142](tfshz/src/main/java/com/tfsh/Service/impl/VoucherOrderServiceImpl.java#L142)：
+`tfshz/src/main/java/com/tfsh/Service/impl/VoucherOrderServiceImpl.java:142`：
 
 ```
 抢券成功 → Redis 里 DECR 已执行、SADD 已执行（用户被标记为"已抢到"）
@@ -203,7 +203,7 @@ Set<String> keys = stringRedisTemplate.keys(LOGIN_REFRESH_KEY + userId + ":*");
 
 ### SETNX 干了什么
 
-[SeckillStockRollback.java:54](tfshz/src/main/java/com/tfsh/seckill/SeckillStockRollback.java#L54)：
+`tfshz/src/main/java/com/tfsh/seckill/SeckillStockRollback.java:54`：
 
 ```java
 Boolean first = stringRedisTemplate.opsForValue()
@@ -257,14 +257,14 @@ if (!seckillOrderPublisher.publish(codec.fromOrder(order))) {
     stockRollback.rollback(voucherId, user.getId());   // ← 无守卫
 ```
 
-守卫加在**消费侧**（[SeckillOrderProcessor.java:47](tfshz/src/main/java/com/tfsh/seckill/SeckillOrderProcessor.java#L47)、[52](tfshz/src/main/java/com/tfsh/seckill/SeckillOrderProcessor.java#L52)）：
+守卫加在**消费侧**（`tfshz/src/main/java/com/tfsh/seckill/SeckillOrderProcessor.java:47`、`tfshz/src/main/java/com/tfsh/seckill/SeckillOrderProcessor.java:52`）：
 
 ```java
 case USER_DUPLICATE  -> stockRollback.rollbackOnce(order.getId(), ...);   // ← 有守卫
 case STOCK_EXHAUSTED -> stockRollback.rollbackOnce(order.getId(), ...);
 ```
 
-而投递失败这条路有个残留风险：[KafkaSeckillOrderPublisher.java:39](tfshz/src/main/java/com/tfsh/seckill/mq/KafkaSeckillOrderPublisher.java#L39) 用的是 `kafkaTemplate.send(...).get(3, TimeUnit.SECONDS)`。**客户端 3 秒超时，不代表 broker 没收到。** 如果消息其实进了 Kafka，你这边判定失败并回滚，消费者随后照样建单 → 库存退了一次、订单也生成了 → 超卖。
+而投递失败这条路有个残留风险：`tfshz/src/main/java/com/tfsh/seckill/mq/KafkaSeckillOrderPublisher.java:39` 用的是 `kafkaTemplate.send(...).get(3, TimeUnit.SECONDS)`。**客户端 3 秒超时，不代表 broker 没收到。** 如果消息其实进了 Kafka，你这边判定失败并回滚，消费者随后照样建单 → 库存退了一次、订单也生成了 → 超卖。
 
 所以更准确的说法是：**SETNX 守卫保护的是“消费侧的重复投递”，防不住“发送超时但实际成功”这种歧义。** 后者的正确解法不是加守卫，而是：
 - 让 Kafka 的 `enable.idempotence=true` + `acks=all`（你已经配了）把重复**消息**去掉
@@ -291,7 +291,7 @@ UNIQUE KEY uk_user_voucher (user_id, voucher_id)
 
 关键在它的可靠性来自哪：不是应用层判断，不是 Redis，是**存储引擎的索引结构**。两个事务同时插入同样的 `(user, voucher)`，InnoDB 在索引上排队，第二个必然失败。
 
-你代码里就是这么兜的（[SeckillOrderPersistService.java:102](tfshz/src/main/java/com/tfsh/seckill/SeckillOrderPersistService.java#L102)）：
+你代码里就是这么兜的（`tfshz/src/main/java/com/tfsh/seckill/SeckillOrderPersistService.java:102`）：
 
 ```java
 try {
@@ -324,7 +324,7 @@ UPDATE seckill_voucher SET stock = stock - 1 WHERE voucher_id = 1001 AND stock >
 
 正确写法的关键是：**“判断库存够不够”和“把库存减掉”写在了同一条语句里。** 数据库执行这条 UPDATE 时锁住这一行，在锁的保护下完成“看 stock 是不是 > 0 → 是就减”。中间没有缝隙给别人插进来。
 
-然后看返回值（[StockService.java:53](tfshz/src/main/java/com/tfsh/order/StockService.java#L53) 末尾那个 `.update()`）：**影响行数 1 = 扣成功，0 = 条件没满足（库存没了）**。业务就靠这个布尔值分流。
+然后看返回值（`tfshz/src/main/java/com/tfsh/order/StockService.java:53` 末尾那个 `.update()`）：**影响行数 1 = 扣成功，0 = 条件没满足（库存没了）**。业务就靠这个布尔值分流。
 
 这就是超卖的标准解法：**让数据库保证“不会减成负数”，而不是在 Java 里写 `if (stock > 0) stock--;`**——后者在并发下一定出事，因为 `if` 和 `--` 之间隔着一个“可以被别人插队”的空档。
 
@@ -332,7 +332,7 @@ UPDATE seckill_voucher SET stock = stock - 1 WHERE voucher_id = 1001 AND stock >
 
 `SET lock:xxx 1 NX PX 3000`，只有一个人能拿到，其他人在门外等。
 
-它解决的问题是：有些操作**不是一条 SQL 能说完的**。比如落库这段（[SeckillOrderPersistService.java:79](tfshz/src/main/java/com/tfsh/seckill/SeckillOrderPersistService.java#L79) 起）：
+它解决的问题是：有些操作**不是一条 SQL 能说完的**。比如落库这段（`tfshz/src/main/java/com/tfsh/seckill/SeckillOrderPersistService.java:79` 起）：
 
 ```
 1. 查这个用户有没有买过
@@ -356,7 +356,7 @@ UPDATE seckill_voucher SET stock = stock - 1 WHERE voucher_id = 1001 AND stock >
 
 | 层   | 手段                                                         | 挡住什么                       | 靠谱程度                      |
 | ---- | ------------------------------------------------------------ | ------------------------------ | ----------------------------- |
-| 1    | Redis + Lua（[seckill.lua](tfshz/src/main/resources/lua/seckill.lua)） | 99% 的无效流量，压根不碰数据库 | 快，但数据可能在 Redis 里算错 |
+| 1    | Redis + Lua（`tfshz/src/main/resources/lua/seckill.lua`） | 99% 的无效流量，压根不碰数据库 | 快，但数据可能在 Redis 里算错 |
 | 2    | Redisson 锁                                                  | 把同一用户的落库串行化         | **可能失效**                  |
 | 3    | 条件更新 `WHERE stock > 0`                                   | 库存不会变成负数               | 数据库保证                    |
 | 4    | 唯一索引 `(user_id, voucher_id)`                             | 不出重复单                     | 数据库保证，最硬              |
@@ -371,9 +371,9 @@ UPDATE seckill_voucher SET stock = stock - 1 WHERE voucher_id = 1001 AND stock >
 
 ### ⚠️ 这里有个必须补的窟窿
 
-你的代码注释里反复提到“唯一索引 `uk_user_voucher` 兜住一人一单”——[SeckillOrderPersistService.java:31](tfshz/src/main/java/com/tfsh/seckill/SeckillOrderPersistService.java#L31)、[104](tfshz/src/main/java/com/tfsh/seckill/SeckillOrderPersistService.java#L104)、[SeckillOrderKafkaListener.java:24](tfshz/src/main/java/com/tfsh/seckill/mq/SeckillOrderKafkaListener.java#L24)。
+你的代码注释里反复提到“唯一索引 `uk_user_voucher` 兜住一人一单”——`tfshz/src/main/java/com/tfsh/seckill/SeckillOrderPersistService.java:31`、`tfshz/src/main/java/com/tfsh/seckill/SeckillOrderPersistService.java:104`、`tfshz/src/main/java/com/tfsh/seckill/mq/SeckillOrderKafkaListener.java:24`。
 
-但我在 `tfshz/sql/` 下**没找到任何创建这个索引的语句**。[voucher_order_upgrade.sql](tfshz/sql/voucher_order_upgrade.sql) 只加了 `uk_voucher_verify_code` 和 `idx_voucher_status_expire`，基础表 `tb_voucher_order` 的建表语句也不在仓库里。
+但我在 `tfshz/sql/` 下**没找到任何创建这个索引的语句**。`tfshz/sql/voucher_order_upgrade.sql` 只加了 `uk_voucher_verify_code` 和 `idx_voucher_status_expire`，基础表 `tb_voucher_order` 的建表语句也不在仓库里。
 
 也就是说：**注释宣称的“最硬的一道防线”，目前可能根本不存在。**
 
@@ -405,7 +405,7 @@ SELECT user_id, voucher_id, COUNT(*) c FROM tb_voucher_order
 
 ### 先还原竞争
 
-定时任务（[OrderTimeoutTask.java](tfshz/src/main/java/com/tfsh/task/OrderTimeoutTask.java)）每 60 秒扫一次，捞出“状态 = 待支付 且 已过支付截止时间”的订单，准备关单并回补库存。
+定时任务（`tfshz/src/main/java/com/tfsh/task/OrderTimeoutTask.java`）每 60 秒扫一次，捞出“状态 = 待支付 且 已过支付截止时间”的订单，准备关单并回补库存。
 
 与此同时用户刚好付完钱，支付回调准备把状态改成已支付。
 
@@ -435,7 +435,7 @@ UPDATE tb_voucher_order
 - **影响 1 行** → 中间没人动过，改成功了
 - **影响 0 行** → 有人先改了，我这次不算数
 
-你代码里的 `casStatus`（[VoucherOrderServiceImpl.java:423](tfshz/src/main/java/com/tfsh/Service/impl/VoucherOrderServiceImpl.java#L423)）就是这个：
+你代码里的 `casStatus`（`tfshz/src/main/java/com/tfsh/Service/impl/VoucherOrderServiceImpl.java:423`）就是这个：
 
 ```java
 LambdaUpdateWrapper<VoucherOrder> wrapper = Wrappers.<VoucherOrder>lambdaUpdate()
@@ -470,7 +470,7 @@ if (current == null || current.getStatus() != expectStatus) {
 
 #### 修正一：不只是“未支付 → 已支付”这一条边
 
-准确说是“**状态机只允许特定的迁移**”，每条边都是一次 CAS。你项目的状态（[OrderStatus.java](tfshz/src/main/java/com/tfsh/order/OrderStatus.java)）有四条边：
+准确说是“**状态机只允许特定的迁移**”，每条边都是一次 CAS。你项目的状态（`tfshz/src/main/java/com/tfsh/order/OrderStatus.java`）有四条边：
 
 | 从        | 到        | 触发者                                        |
 | --------- | --------- | --------------------------------------------- |
@@ -484,7 +484,7 @@ if (current == null || current.getStatus() != expectStatus) {
 1. **从终态出发的迁移**（已关闭 → 已支付）——最危险的方向
 2. **重复的同向迁移**（已支付 → 已支付）——重复的支付回调
 
-第 2 类顺便就做了**幂等**：重复回调第二次 CAS 影响 0 行，代码走到 `latest.getStatus() == PAID` 分支返回成功（[VoucherOrderServiceImpl.java:255](tfshz/src/main/java/com/tfsh/Service/impl/VoucherOrderServiceImpl.java#L255)），用户看到的是“支付成功”而不是报错。这个细节很好，值得单独讲。
+第 2 类顺便就做了**幂等**：重复回调第二次 CAS 影响 0 行，代码走到 `latest.getStatus() == PAID` 分支返回成功（`tfshz/src/main/java/com/tfsh/Service/impl/VoucherOrderServiceImpl.java:255`），用户看到的是“支付成功”而不是报错。这个细节很好，值得单独讲。
 
 #### 修正二：不一定非要独立的 version 字段
 
